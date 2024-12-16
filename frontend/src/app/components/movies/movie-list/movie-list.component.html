@@ -1,0 +1,46 @@
+@defer (when movies.length > 0) {
+  <div class="container">
+    <div class="row my-3">
+      <div class="col-12">
+        <button routerLink="/movies/add"
+                class="btn btn-outline-primary">Add Movie</button>
+      </div>
+      @for (movie of movies; track movie._id) {
+        <div class="col-md-4 col-lg-3 col-sm-6 mt-2">
+          <div class="card" >
+            <div class="card-header" routerLink="/movies/edit/{{movie._id}}">
+              <h2 class="card-title">
+                {{movie.title}}
+              </h2>
+              <p class="card-subtitle">{{movie.director}}</p>
+            </div>
+            <img [src]="movie.poster" alt="{{movie.title}}"
+                 class="card-img-top" routerLink="/movies/edit/{{movie._id}}">
+            <div class="card-body" routerLink="/movies/edit/{{movie._id}}">
+              <p class="card-text">{{movie.plot}}</p>
+            </div>
+            <div class="card-footer">
+              <div class="d-flex justify-content-between">
+                <p routerLink="/movies/edit/{{movie._id}}" class="text-muted">{{movie.year}}</p>
+                <h4>
+                  <fa-icon [icon]="faTrashCan"
+                           (click)="deleteMovie(movie)"
+                           class="text-danger"></fa-icon>
+                </h4>
+
+              </div>
+              <div routerLink="/movies/edit/{{movie._id}}" class="d-flex">
+                @for (genre of movie.genres; track genre){
+                  <span class="badge rounded-pill text-bg-primary">
+                    {{genre}} </span>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+} @placeholder () {
+  <h2 class="text-primary">Loading...</h2>
+}

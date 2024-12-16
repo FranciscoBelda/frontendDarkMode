@@ -1,0 +1,4 @@
+.card:hover{
+  cursor: pointer;
+  background: var(--bs-warning-bg-subtle) !important;
+}
